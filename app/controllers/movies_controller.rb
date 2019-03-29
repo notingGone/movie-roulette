@@ -8,14 +8,8 @@ class MoviesController < ApplicationController
   end
 
   def details
-    @movie1 = Tmdb::Find.movie('tt0266697', external_source: 'imdb_id')
-    @movie2 = Tmdb::Movie.detail(24)
-    @posters = Tmdb::Movie.posters(24)
-    config = Tmdb::Configuration.get
-    @path = config.images.secure_base_url +
-            config.images.poster_sizes.first +
-            @posters.first.file_path
-
+    @movie = Tmdb::Movie.detail(24)
+    @poster_url = PosterUrl.new(@movie).path
   end
 
   def search

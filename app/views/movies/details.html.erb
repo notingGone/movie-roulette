@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
     <p>
-      <%= image_tag @path %>
+      <%= image_tag @poster_url %>
     </p>
   </div>
   <div class="col-sm-6 word-wrap">
     <p>Here's the details of the movie using @movie = Tmdb::Movie.detail(24)</p>
     <p>
-      <% @movie2.each_pair do |key, value| %>
+      <% @movie.each_pair do |key, value| %>
         <p>
           <%= key %><br>
           <%= value %>
