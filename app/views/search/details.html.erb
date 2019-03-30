@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm word-wrap">
+      <%= image_tag small_movie_poster_url(@movies.results.first) %>
+      <div class="list-group"><p>
+        <% @movies.results.each do |movie| %>
+          <p>
+            <strong>movie.id:</strong> <%= movie.id %>
+            <strong>movie.title:</strong> <%= movie.title %>
+            <strong>movie.release_date:</strong> <%= movie.release_date %>
+          </p>
+        <% end %>
+      </p></div>
+    </div>
+  </div>
+</div>

@@ -7,14 +7,6 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
 
-  def details
-    @movie = Tmdb::Movie.detail(24)
-    @poster_url = PosterUrl.new(@movie).path
-  end
-
-  def search
-  end
-
   # GET /movies/1
   # GET /movies/1.json
   def show
