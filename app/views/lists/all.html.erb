@@ -1,2 +1,11 @@
-<h1>Lists#all</h1>
-<p>Find me in app/views/lists/all.html.erb</p>
+<h1>These are all of your lists:</h1>
+<p>
+  <div class="list-group">
+    <% @lists.each do |list| %>
+      <%= link_to list_path(list), class: "list-group-item" do %>
+        List Name: <%= list.name %><br>
+        # of Movies: <%= list.movies.length %>
+      <% end %>
+    <% end %>
+  </div>
+</p>

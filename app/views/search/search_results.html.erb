@@ -10,7 +10,7 @@
             <% end %>
           </div>
           <div class="media-body">
-            <h4 class="media-heading"><%= movie.title %></h4>
+            <h4 class="media-heading"><%= link_to movie.title, details_path(id: movie.id) %></h4>
             <ul>
               <li><strong>movie.id </strong><%= movie.id %><br></li>
               <li><strong>movie.release_date </strong><%= movie.release_date %><br></li>

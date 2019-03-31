@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<% if !@movie.poster_path.nil? %>
+  <p>
+    <%= image_tag small_movie_poster_url(@movie) %>
+  </p>
+<% end %>
+
 <p>
   <strong>Imdb:</strong>
   <%= @movie.imdb_id %>
