@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
 
   def details
-    @movies = Tmdb::Search.movie('transformers')
+    @movie = Tmdb::Movie.detail(24)
     # @movie = Tmdb::Movie.detail(135397)
     # @movie = Movie.new(Tmdb::Movie.detail(24))
     # @poster_url = PosterUrl.new(@movie).path
