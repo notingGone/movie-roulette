@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_31_124701) do
+ActiveRecord::Schema.define(version: 2019_03_31_132630) do
+
+  create_table "lists", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "movies", force: :cascade do |t|
     t.integer "imdb_id"
@@ -25,6 +32,13 @@ ActiveRecord::Schema.define(version: 2019_03_31_124701) do
     t.string "homepage"
     t.integer "popularity"
     t.integer "vote_average"
+  end
+
+  create_table "movies_lists", force: :cascade do |t|
+    t.integer "movie_id"
+    t.integer "list_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

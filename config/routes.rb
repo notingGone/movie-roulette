@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'lists/new'
+  get 'lists/all'
+  get 'lists/view'
+  get 'lists/edit'
   root 'search#search'
   resources :movies
   devise_for :views
