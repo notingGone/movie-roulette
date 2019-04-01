@@ -20,26 +20,29 @@ class SearchController < ApplicationController
   end
 
   def save
-    attributes = [ :title, :overview, :tagline, :tmdb_id, :homepage,
-                 :runtime, :imdb_id, :poster_path, :popularity ]
-    details = Tmdb::Movie.detail(params[:id]).select do |key, value|
-                attributes.include? key
-              end
-    movie = Movie.new(details)
-    #
-    # movie.title = details.title
-    # movie.overview = details.overview
-    # movie.tagline = details.tagline
-    # movie.tmdb_id = details.id
-    # movie.homepage = details.homepage
-    # # movie.release_date = details.release_date
-    # movie.runtime = details.runtime
-    # movie.imdb_id = details.imdb_id
-    # movie.poster_path = details.poster_path
-    # movie.popularity = details.popularity
-    # movie.save
+    # attributes = [ :title, :overview, :tagline, :tmdb_id, :homepage,
+    #              :runtime, :imdb_id, :poster_path, :popularity ]
+    # debugger
+    details = Tmdb::Movie.detail(params[:id])
+    #             attributes.include? key
+    #           end
+    # debugger
+    movie = Movie.new()
 
-    redirect_to 'details', id: params[:id]
+    movie.title = details.title
+    movie.overview = details.overview
+    movie.tagline = details.tagline
+    movie.tmdb_id = details.id
+    movie.homepage = details.homepage
+    # movie.release_date = details.release_date
+    movie.runtime = details.runtime
+    movie.imdb_id = details.imdb_id
+    movie.poster_path = details.poster_path
+    movie.popularity = details.popularity
+    movie.save
+
+    redirect_to details_path(id: params[:id])
+
   end
 
   private
