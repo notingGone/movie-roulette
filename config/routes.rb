@@ -7,10 +7,11 @@ Rails.application.routes.draw do
   resources :movies
   resources :lists
   devise_for :users
-  get 'search' => 'search#search'
-  get 'search_results' => 'search#search_results'
-  get 'details/:id' => 'search#details'
-  get 'details' => 'search#details'
-  get 'save' => 'search#save'
+  get 'search' => 'movies#search'
+  get 'search_results' => 'movies#search_results'
+  get 'details/:id' => 'movies#details'
+  get 'details' => 'movies#details'
+  get 'save' => 'movies#save'
+  get 'add' => 'movies#add'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

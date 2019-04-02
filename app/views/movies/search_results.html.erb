@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <%= link_to 'Back', :back, class: "btn btn-sm btn-dark" %>
+    <ul class="media-list">
+      <% @movies.results.each do |movie| %>
+        <li class="media">
+          <div class="media-left">
+            <% if !movie.poster_path.nil? %>
+              <%= image_tag small_movie_poster_url(movie) %>
+            <% end %>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading"><%= link_to movie.title, details_path(id: movie.id) %></h4>
+            <ul>
+              <li><strong>movie.id </strong><%= movie.id %><br></li>
+              <li><strong>movie.release_date </strong><%= movie.release_date %><br></li>
+              <li><strong>movie.overview </strong><%= movie.overview %><br></li>
+            </ul>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
+  </div>
+</div>

@@ -7,19 +7,69 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
 
-  # GET /movies/1
-  # GET /movies/1.json
-  def show
-  end
-
   # GET /movies/new
   def new
     @movie = Movie.new
   end
 
-  # GET /movies/1/edit
-  def edit
+  def details
+    if (@movie = Movie.find_by(tmdb_id: params[:id])).nil?
+      @movie = Tmdb::Movie.detail(params[:id])
+      @not_saved = true
+    end
+    # @not_saved = Movie.find_by(tmdb_id: params[:id]).nil?
   end
+
+  def save
+    # attributes = [ :title, :overview, :tagline, :tmdb_id, :homepage,
+    #              :runtime, :imdb_id, :poster_path, :popularity ]
+    details = Tmdb::Movie.detail(params[:id])
+    #             attributes.include? key
+    #           end
+    movie = Movie.new()
+
+    movie.title = details.title
+    movie.overview = details.overview
+    movie.tagline = details.tagline
+    movie.tmdb_id = details.id
+    movie.homepage = details.homepage
+    # movie.release_date = details.release_date
+    movie.runtime = details.runtime
+    movie.imdb_id = details.imdb_id
+    movie.poster_path = details.poster_path
+    movie.popularity = details.popularity
+    movie.save
+
+    # redirect_to details_path(id: params[:id])
+  end
+
+  def search_results
+    # @movies = Movie.all
+    # debugger
+    @movies = Tmdb::Search.movie(params[:keywords])
+  end
+
+  def add
+    # debugger
+    if !Movie.find_by(tmdb_id: params[:id])
+      self.save
+    end
+    current_user.lists.find_by(id: params[:list_id]).movies <<
+                 Movie.find_by(tmdb_id: params[:id])
+    redirect_to details_path(id: params[:id])
+  end
+
+  # GET /movies/1
+  # GET /movies/1.json
+  def show
+    @movie = Tmdb::Movie.detail(params[:id])
+    @not_saved = Movie.find_by(tmdb_id: params[:id]).nil?
+  end
+
+
+  # # GET /movies/1/edit
+  # def edit
+  # end
 
   # POST /movies
   # POST /movies.json
@@ -64,11 +114,11 @@ class MoviesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
-      @movie = Movie.find(params[:id])
+      @movie = Movie.find(params[:id]) unless Movie.find(params[:id]).nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:imdb_id, :title, :overview, :poster_path, :runtime, :tagline)
+      params.require(:movie).permit(:id, :imdb_id, :title, :overview, :poster_path, :runtime, :tagline, :tmdb_id, :homepage, :popularity, :vote_average)
     end
 end

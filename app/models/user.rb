@@ -5,6 +5,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :lists
-
-  attr_accessor :username, :email, :password, :password_confirmation, :remember_me
 end

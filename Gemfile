@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.5'
 
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'devise'
 gem 'themoviedb-api'

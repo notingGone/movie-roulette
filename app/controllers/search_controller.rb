@@ -15,6 +15,14 @@ class SearchController < ApplicationController
     @movies = Tmdb::Search.movie(params[:keywords])
   end
 
+  def add
+    if !Movie.find_by(tmdb_id: params[:id])
+      # Movie.
+    end
+    current_user.lists.find_by(id: params[:list_id]) <<
+                 Movie.find_by(tmdb_id: params[:id])
+  end
+
   def search
     # @search = MovieSearch.new
   end

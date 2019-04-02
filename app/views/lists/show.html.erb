@@ -1,11 +1,12 @@
-<p>Find me in app/views/lists/view.html.erb</p>
+<p>Find me in app/views/lists/show.html.erb</p>
 <h1><%= @list.name %></h1>
 
 <div class="list-group">
   <% @list.movies.each do |movie| %>
-    <%= link_to movie_path(movie), class: "list-group-item" do %>
+    <%= link_to details_path(id: movie.tmdb_id), class: "list-group-item" do %>
       <strong>Title: </strong><%= movie.title %><br>
-      <strong>ID: </strong><%= movie.id %>
+      <strong>ID: </strong><%= movie.tmdb_id %>
     <% end %>
   <% end %>
 </div>
+<%= link_to "Back", :back, class: "btn btn-sm btn-dark" %>
