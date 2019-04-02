@@ -39,19 +39,13 @@ class MoviesController < ApplicationController
     movie.poster_path = details.poster_path
     movie.popularity = details.popularity
     movie.save
-
-    # redirect_to details_path(id: params[:id])
   end
 
   def search_results
-    # @movies = Movie.all
-    # debugger
     @movies = Tmdb::Search.movie(params[:keywords])
-    # debugger
   end
 
   def add
-    # debugger
     if !Movie.find_by(tmdb_id: params[:id])
       self.save
     end
