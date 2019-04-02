@@ -47,6 +47,7 @@ class MoviesController < ApplicationController
     # @movies = Movie.all
     # debugger
     @movies = Tmdb::Search.movie(params[:keywords])
+    # debugger
   end
 
   def add
