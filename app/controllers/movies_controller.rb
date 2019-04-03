@@ -7,6 +7,9 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
 
+  def search
+  end
+
   # GET /movies/new
   def new
     @movie = Movie.new
