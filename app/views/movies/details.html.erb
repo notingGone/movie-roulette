@@ -6,10 +6,10 @@
       <% end %>
       <h2><%= @movie.title %></h2>
       <% if @not_saved %>
-        <span class="badge badge-success">In database</span>
+        <span class="badge badge-warning">NOT in DB</span>
         <%#= link_to "Add to DB", save_path(id: @movie.id), class: "btn btn-success" %>
       <% else %>
-        <span class="badge badge-warning">In database</span>
+        <span class="badge badge-success">In database <i class="fa fa-check"></i></span>
       <% end %>
       <div class="btn-group">
         <button class="btn btn-dark btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
