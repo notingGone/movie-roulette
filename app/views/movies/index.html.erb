@@ -5,7 +5,9 @@
 <table>
   <thead>
     <tr>
+      <th>Id</th>
       <th>Imdb</th>
+      <th>Tmdb</th>
       <th>Title</th>
       <th>Overview</th>
       <th>Poster path</th>
@@ -18,7 +20,9 @@
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
+        <td><%= movie.id %></td>
         <td><%= movie.imdb_id %></td>
+        <td><%= movie.tmdb_id %></td>
         <td><%= movie.title %></td>
         <td><%= movie.overview %></td>
         <td><%= movie.poster_path %></td>
