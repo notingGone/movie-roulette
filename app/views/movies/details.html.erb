@@ -9,7 +9,7 @@
         <span class="badge badge-warning">NOT in DB</span>
         <%#= link_to "Add to DB", save_path(id: @movie.id), class: "btn btn-success" %>
       <% else %>
-        <span class="badge badge-success">In database <i class="fa fa-check"></i></span>
+        <span class="badge badge-success">In database<i class="fa fa-check"></i></span>
       <% end %>
       <div class="btn-group">
         <button class="btn btn-dark btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
@@ -40,7 +40,6 @@
           <% end %>
         <% end %>
       </p></div>
-      <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
     </div>
   </div>
 </div>

@@ -36,6 +36,7 @@ class MoviesController < ApplicationController
     movie.tagline = details.tagline
     movie.tmdb_id = details.id
     movie.homepage = details.homepage
+    movie.adult = details.adult
     # movie.release_date = details.release_date
     movie.runtime = details.runtime
     movie.imdb_id = details.imdb_id
@@ -45,7 +46,7 @@ class MoviesController < ApplicationController
   end
 
   def search_results
-    @movies = Tmdb::Search.movie(params[:keywords])
+    @movies = Tmdb::Search.movie(params[:query], include_adult: params[:include_adult])
   end
 
   def add
@@ -117,6 +118,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:id, :imdb_id, :title, :overview, :poster_path, :runtime, :tagline, :tmdb_id, :homepage, :popularity, :vote_average)
+      params.require(:movie).permit(:id, :imdb_id, :title, :overview, :poster_path, :runtime, :tagline, :tmdb_id, :homepage, :popularity, :vote_average, :adult)
     end
 end
