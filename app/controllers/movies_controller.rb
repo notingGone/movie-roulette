@@ -16,8 +16,8 @@ class MoviesController < ApplicationController
   end
 
   def details
-    if (@movie = Movie.find_by(tmdb_id: params[:id])).nil?
-      @movie = Tmdb::Movie.detail(params[:id])
+    if (Movie.find_by(tmdb_id: params[:id])).nil?
+      @movie = Tmdb::Movie.detail(params[:id], include_adult: params[:include_adult])
       @not_saved = true
     end
     # @not_saved = Movie.find_by(tmdb_id: params[:id]).nil?

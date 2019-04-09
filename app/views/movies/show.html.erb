@@ -21,19 +21,16 @@
           <% end %>
         </div>
       </div>
-      <%# debugger %>
-      <%# if current_user.lists.movies.include? @movie %>
-        <h1><%#= "SUCCESS" %></h1>
-      <%# end %>
-      <div class="list-group"><p>
-        <% @movie.each_pair do |key, value| %>
-          <p>
-            <strong><%= key %>: </strong>
-            <%= value %>
-          </p>
-        <% end %>
-      </p></div>
-      <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
+      <div class="list-group">
+        <p>
+          <% @movie.each_pair do |key, value| %>
+            <p>
+              <strong><%= key %>: </strong>
+              <%= value %>
+            </p>
+          <% end %>
+        </p>
+      </div>
     </div>
   </div>
 </div>

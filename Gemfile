@@ -7,21 +7,23 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'devise'
 gem 'themoviedb-api'
-
-
+gem 'font-awesome-rails'
+gem 'cancancan'
+gem 'pry-rails'
 gem 'rails', '~> 5.2.3'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'binding_of_caller'
 
 group :development, :test do
+  gem 'better_errors'
   gem 'sqlite3', '~> 1.3.6'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
 group :development do

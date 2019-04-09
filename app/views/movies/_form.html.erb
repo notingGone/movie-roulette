@@ -5,6 +5,11 @@
     <%= form.text_field :keywords %>
   </div>
 
+  <div class="form-group">
+    <%= form.label :adult %>
+    <%= form.check_box :include_adult, {}, true, false %>
+  </div>
+
   <div class="actions">
     <%= form.submit "Search" %>
   </div>

@@ -1,4 +1,13 @@
+NAVBAR!!
+
+
 all.html.erb:
   list-group-items should be <a>'s instead of <li>'s
   list-group should be <div>, instead of <ul>
   href should be 'list/view?id=list.id'
+
+gem 'figaro'
+
+paginate search results
+
+paginate movies
