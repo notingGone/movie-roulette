@@ -1,6 +1,3 @@
-NAVBAR!!
-
-
 all.html.erb:
   list-group-items should be <a>'s instead of <li>'s
   list-group should be <div>, instead of <ul>
@@ -11,3 +8,23 @@ gem 'figaro'
 paginate search results
 
 paginate movies
+
+cancancan for admin/users
+
+add age to users, check ID for adult search
+
+create an "on-deck" controller and views
+  load movies into "on-deck" which will
+  be the working list from which the winning
+  movie will be chosen
+
+functionality: move to list
+functionality: copy to list
+
+don't allow duplicate movies on any list
+
+make a layout/_list_movies.html.erb
+
+add adult badge to search results
+
+put search form in search results (navbar?)

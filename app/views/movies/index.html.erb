@@ -1,14 +1,42 @@
-<h1>Movies On Server</h1>
-
-      <th>Id</th>
-      <th>Imdb</th>
-      <th>Tmdb</th>
-      <th>Title</th>
-      <th>Overview</th>
-      <th>Poster path</th>
-      <th>Runtime</th>
-      <th>Tagline</th>
-      <th colspan="3"></th>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Movies On Server</h1>
+      <ul class="media-list">
+        <% @movies.each do |movie| %>
+          <li class="media mb-0">
+            <% if !movie.poster_path.nil? %>
+              <div class="media-left mr-1">
+                <%= image_tag small_movie_poster_url(movie) %>
+              </div>
+            <% end %>
+            <div class="media-body mb-0">
+              <h4 class="media-heading mt-0">
+                <%= link_to movie.title, details_path(id: movie.tmdb_id) %>
+                <% if movie.adult == true %>
+                  <div class='badge badge-info'>Adult</div>
+                <% end %>
+              </h4>
+              <ul>
+                <li>
+                  <strong>tmdb_id:
+                  </strong><%= movie.tmdb_id %></li>
+                <% if !movie.tagline.empty? %>
+                  <li><%= movie.tagline %></li>
+                <% end %>
+              </ul>
+            </div>
+          </li>
+          <div class="mb-4">
+            <%= link_to 'Shw', movie %>
+            <%= link_to 'dt', edit_movie_path(movie) %>
+            <%= link_to 'Dstry', movie, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
 
     <% @movies.each do |movie| %>
       <tr
