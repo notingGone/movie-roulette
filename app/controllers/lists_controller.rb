@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:edit, :delete, :show]
+  before_action :set_list, only: [:edit, :destroy, :show]
 
   def new
     @list = List.new
@@ -57,7 +57,11 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    
+    @list.destroy
+    respond_to do |format|
+      format.html { redirect_to lists_path, notice: 'Movie was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   def all

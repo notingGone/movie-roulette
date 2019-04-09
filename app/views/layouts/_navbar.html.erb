@@ -5,6 +5,7 @@
       <li><%= link_to "Database", movies_path, class: "btn btn-info mx-1"  %></li>
       <li><%= link_to "Lists", :lists, class: "btn btn-primary mx-1" %></li>
     </ul>
+    <span id="notice"><%= notice %></span>
     <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-warning mx-1" %>
   </div>
 </nav>
