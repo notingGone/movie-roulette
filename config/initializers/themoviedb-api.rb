@@ -1,2 +1,2 @@
-Tmdb::Api.key("a9fb4589d51b093a13e40f875c7b5897")
+Tmdb::Api.key(ENV['tmdb_api_key'])
 CONFIG = Tmdb::Configuration.get
