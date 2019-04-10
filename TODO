@@ -1,8 +1,3 @@
-all.html.erb:
-  list-group-items should be <a>'s instead of <li>'s
-  list-group should be <div>, instead of <ul>
-  href should be 'list/view?id=list.id'
-
 gem 'figaro'
 
 paginate search results
@@ -24,7 +19,5 @@ functionality: copy to list
 don't allow duplicate movies on any list
 
 make a layout/_list_movies.html.erb
-
-add adult badge to search results
 
 put search form in search results (navbar?)
