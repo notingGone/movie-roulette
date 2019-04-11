@@ -6,7 +6,7 @@
     <div class="list-group">
       <% @lists.each do |list| %>
         <div class="list-group-item">
-          <h4><%= link_to list.name, list_path(list) %></h4>
+          <h4><%= link_to list.name, list_path(list, list_id: list.id) %></h4>
           <strong>Movies in list: </strong><%= list.movies.length %><br>
           <%= link_to "Destroy List", list, method: :delete, class: "badge badge-danger", data: { confirm: 'Are you sure?' } %>
         </div>

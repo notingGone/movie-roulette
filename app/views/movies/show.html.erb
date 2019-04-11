@@ -1,12 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-sm word-wrap">
-      <% if !@movie.poster_path.nil? %>
+      <% if !@movie['poster_path'].nil? %>
         <%= image_tag small_movie_poster_url(@movie) %>
       <% end %>
-      <h2><%= @movie.title %></h2>
+      <h2><%= @movie['title'] %></h2>
       <% if @not_saved %>
-      <%# debugger %>
         <%= link_to "Add to DB", save_path(id: @movie.id), class: "btn btn-success" %>
       <% else %>
         <span class="badge">In database</span>
@@ -17,7 +16,7 @@
         </button>
         <div class="dropdown-menu">
           <% current_user.lists.each do |list| %>
-            <%= link_to list.name, save_path(list_id: list.id, id: @movie.tmdb_id), class: "dropdown-item" %>
+            <%= link_to list.name, save_path(list_id: list.id, id: @movie['tmdb_id']), class: "dropdown-item" %>
           <% end %>
         </div>
       </div>

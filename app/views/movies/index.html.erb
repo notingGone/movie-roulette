@@ -12,7 +12,7 @@
             <% end %>
             <div class="media-body mb-0">
               <h4 class="media-heading mt-0">
-                <%= link_to movie.title, details_path(id: movie.tmdb_id) %>
+                <%= link_to movie.title, details_path(tmdb_id: movie.tmdb_id) %>
                 <% if movie.adult == true %>
                   <div class='badge badge-info'>Adult</div>
                 <% end %>
@@ -28,7 +28,7 @@
             </div>
           </li>
           <div class="mb-4">
-            <%= link_to 'Shw', movie %>
+            <%= link_to 'Shw', movie_path(movie, tmdb_id: movie.tmdb_id) %>
             <%= link_to 'dt', edit_movie_path(movie) %>
             <%= link_to 'Dstry', movie, method: :delete, data: { confirm: 'Are you sure?' } %>
           </div>

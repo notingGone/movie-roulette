@@ -14,7 +14,7 @@
             <% end %>
             <div class="media-body">
               <h4 class="media-heading mt-0">
-                <%= link_to movie.title, details_path(id: movie.tmdb_id) %>
+                <%= link_to movie.title, details_path(tmdb_id: movie.tmdb_id) %>
                 <% if movie.adult == true %>
                   <div class='badge badge-info'>Adult</div>
                 <% end %>

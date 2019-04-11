@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:show, :edit, :update]
+  before_action :set_movie, only: [:edit, :update]
 
   # GET /movies
   # GET /movies.json
@@ -10,14 +10,17 @@ class MoviesController < ApplicationController
   def search
   end
 
+  def edit
+  end
+
   # GET /movies/new
   def new
     @movie = Movie.new
   end
 
   def details
-    if (@movie = Movie.find_by(tmdb_id: params[:id])).nil?
-      @movie = Tmdb::Movie.detail(params[:id], include_adult: params[:include_adult])
+    if (@movie = Movie.find_by(tmdb_id: params[:tmdb_id])).nil?
+      @movie = Tmdb::Movie.detail(params[:tmdb_id])
       @not_saved = true
     end
   end
@@ -29,14 +32,12 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @movie = Tmdb::Movie.detail(params[:id])
-    @not_saved = Movie.find_by(tmdb_id: params[:id]).nil?
+    @movie = Movie.find_by(tmdb_id: params[:tmdb_id]).attributes
+    if @movie.nil?
+      @movie = Tmdb::Movie.detail(params[:tmdb_id])
+      @not_saved = true
+    end
   end
-
-
-  # # GET /movies/1/edit
-  # def edit
-  # end
 
   # POST /movies
   # POST /movies.json

@@ -1,6 +1,19 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:edit, :destroy, :show]
 
+  def add_to_queue
+    @queue = current_queue
+    @queue.save if @queue.id.nil?
+    session[:list_id] = @queue.id
+
+    if !Movie.find_by(tmdb_id: params[:tmdb_id])
+      self.save
+    end
+
+    @queue.movies << Movie.find_by(tmdb_id: params[:tmdb_id])
+    redirect_to details_path(id: params[:tmdb_id])
+  end
+
   def new
     @list = List.new
   end
@@ -24,7 +37,7 @@ class ListsController < ApplicationController
     end
     current_user.lists.find_by(id: params[:list_id]).movies <<
                  Movie.find_by(tmdb_id: params[:tmdb_id])
-    redirect_to details_path(id: params[:tmdb_id])
+    redirect_to details_path(tmdb_id: params[:tmdb_id])
   end
 
   def save
@@ -33,7 +46,7 @@ class ListsController < ApplicationController
     details = Tmdb::Movie.detail(params[:tmdb_id])
     #             attributes.include? key
     #           end
-    movie = Movie.new()
+    movie = Movie.new() if movie.nil?
 
     movie.title = details.title
     movie.overview = details.overview
@@ -51,8 +64,7 @@ class ListsController < ApplicationController
 
   def remove_movie
     MoviesList.find_by(list_id: params[:list_id], movie_id: params[:id]).delete
-    params[:id] = params[:list_id]
-    show
+    show # (list_id: params[:list_id])
     render :show
   end
 
@@ -81,7 +93,7 @@ class ListsController < ApplicationController
   private
 
     def set_list
-      @list = List.find(params[:id])
+      @list = List.find(params[:id]) || List.new
     end
 
     def list_params

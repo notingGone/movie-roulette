@@ -14,13 +14,13 @@
             </div>
             <div class="media-body">
               <h4 class="media-heading">
-                <%= link_to movie.title, details_path(id: movie.id) %>
+                <%= link_to movie.title, details_path(tmdb_id: movie.id) %>
                 <% if movie.adult == true %>
                   <div class='badge badge-info'>Adult</div>
                 <% end %>
               </h4>
               <ul>
-                <li><strong>movie.id </strong><%= movie.id %></li>
+                <li><strong>tmdb_id </strong><%= movie.id %></li>
                 <li><strong>movie.release_date </strong><%= movie.release_date %></li>
                 <li><strong>movie.overview </strong><%= movie.overview %></li>
                 <li><strong>adult </strong><%= movie.adult %></li>
