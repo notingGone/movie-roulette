@@ -6,13 +6,7 @@
       <li><%= link_to "Lists", :lists, class: "btn btn-primary mx-1" %></li>
       <li><%= link_to "Queue", list_path(current_queue, list_id: current_queue.id), class: "btn btn-success mx-1" %></li>
     </ul>
-    <span id="notice" class="alert-alert-info fade show alert-thin"></span>
-    <span id="notice" class="alert alert-info alert-dismissible alert-thin fade show pl-2 pr-4 py-1 m-1" role="alert">
-      <%= notice %>
-      <button type="button" class="close alert-button p-0 px-0 mx-1 mb-2" data-dismiss="alert">
-        &times;
-      </button>
-    </span>
+    <%= notice %>
     <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-warning mx-1" %>
   </div>
 </nav>
