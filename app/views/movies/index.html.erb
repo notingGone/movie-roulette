@@ -18,12 +18,11 @@
                 <% end %>
               </h4>
               <ul>
-                <li>
-                  <strong>tmdb_id:
-                  </strong><%= movie.tmdb_id %></li>
+                <li><strong>tmdb_id: </strong><%= movie.tmdb_id %></li>
                 <% if !movie.tagline.empty? %>
                   <li><%= movie.tagline %></li>
                 <% end %>
+                <li><strong>imdb_id: </strong><%= movie.imdb_id %></li>
               </ul>
             </div>
           </li>

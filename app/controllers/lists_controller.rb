@@ -3,15 +3,13 @@ class ListsController < ApplicationController
 
   def add_to_queue
     @queue = current_queue
-    @queue.save if @queue.id.nil?
-    session[:list_id] = @queue.id
 
-    if !Movie.find_by(tmdb_id: params[:tmdb_id])
-      self.save
+    if !(movie = Movie.find_by(tmdb_id: params[:tmdb_id]))
+      movie = self.save
     end
 
-    @queue.movies << Movie.find_by(tmdb_id: params[:tmdb_id])
-    redirect_to details_path(id: params[:tmdb_id])
+    @queue.movies << movie
+    redirect_to details_path(tmdb_id: params[:tmdb_id])
   end
 
   def new
@@ -60,6 +58,7 @@ class ListsController < ApplicationController
     movie.poster_path = details.poster_path
     movie.popularity = details.popularity
     movie.save
+    movie
   end
 
   def remove_movie
@@ -81,7 +80,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:id])
+    @list = List.find(params[:list_id])
   end
 
   def edit

@@ -5,11 +5,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_queue
 
   def current_queue
-    if session[:list_id]
-      List.find(session[:list_id])
-    else
-      user_signed_in? ? List.create(user_id: current_user.id) : List.new
-    end
+    # create a list that is descriptive and nearly impossible for the user to
+    # 'accidentally' enter for the name of their list
+    queue_list_name = "\u009E#{current_user.username}'s (#{current_user.id}:) queue"
+    List.find_or_create_by(user_id: current_user.id, name: queue_list_name)
   end
 
   protected

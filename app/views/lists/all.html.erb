@@ -1,10 +1,10 @@
-<%= link_to 'Back', :back, class: "btn btn-dark mx-1" %>
 <%= link_to "New List", :new_list, class: "btn btn-info mx-1" %>
 <h1>These are all of your lists:</h1>
 <div class="row">
   <div class="col-md-6">
     <div class="list-group">
       <% @lists.each do |list| %>
+        <% next if list.name.first == "\u009E" %>
         <div class="list-group-item">
           <h4><%= link_to list.name, list_path(list, list_id: list.id) %></h4>
           <strong>Movies in list: </strong><%= list.movies.length %><br>

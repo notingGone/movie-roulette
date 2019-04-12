@@ -13,6 +13,7 @@
  */
 
 @import "bootstrap";
+@import "font-awesome";
 
 html {
   font: firaCode;
@@ -34,4 +35,18 @@ a.btn:visited {
 
 .poster {
   float: left;
+}
+
+#notice {
+  color: white;
+}
+
+.alert-thin {
+  height: 30px;
+  font-size: .75rem;
+}
+
+.alert-button {
+  height: 20px;
+  width: 20px;
 }

@@ -1,4 +1,3 @@
-<%= link_to "Back", :back, class: "btn btn-sm btn-dark" %>
 <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -26,7 +25,9 @@
                 <% if !movie.tagline.empty? %>
                   <li><%= movie.tagline %></li>
                 <% end %>
-                <li><%= link_to 'Remove from List', remove_movie_path(id: movie.id, list_id: @list.id), method: :post, class: "badge badge-danger" %></li>
+                <li><%= link_to 'Remove from List', remove_movie_path(id: movie.id, tmdb_id: movie.tmdb_id, list_id: @list.id), method: :post, class: "badge badge-danger" %></li>
+                <% actual_tmdb_id = movie.tmdb_id.nil? ? movie.id : movie.tmdb_id %>
+                <li><%= link_to 'Add to Queue', queue_path(tmdb_id: actual_tmdb_id), method: :post, class: "badge badge-success mx-1" %></li>
               </ul>
             </div>
           </li>
