@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'save' => 'lists#save'
   get 'add' => 'lists#add'
   get 'test' => 'movies#test'
+  get 'roulette' => 'lists#roulette'
+  get 'queue' => 'lists#queue'
   post 'queue' => 'lists#add_to_queue'
   devise_for :users
   resources :movies, except: :new

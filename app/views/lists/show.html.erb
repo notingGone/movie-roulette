@@ -3,39 +3,7 @@
     <div class="col-md-6">
       <h1><%= @list.name %></h1>
       <%= link_to "Destroy List", @list, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
-
-      
-
-      <ul class="media-list">
-        <% @list.movies.each do |movie| %>
-          <li class="media m-2">
-            <% if !movie.poster_path.nil? %>
-              <div class="media-left mr-1">
-                <%= image_tag small_movie_poster_url(movie) %>
-              </div>
-            <% end %>
-            <div class="media-body">
-              <h4 class="media-heading mt-0">
-                <%= link_to movie.title, details_path(tmdb_id: movie.tmdb_id) %>
-                <% if movie.adult == true %>
-                  <div class='badge badge-info'>Adult</div>
-                <% end %>
-              </h4>
-              <ul>
-                <li>
-                  <strong>tmdb_id:
-                  </strong><%= movie.tmdb_id %></li>
-                <% if !movie.tagline.empty? %>
-                  <li><%= movie.tagline %></li>
-                <% end %>
-                <li><%= link_to 'Remove from List', remove_movie_path(id: movie.id, tmdb_id: movie.tmdb_id, list_id: @list.id), method: :post, class: "badge badge-danger" %></li>
-                <% actual_tmdb_id = movie.tmdb_id.nil? ? movie.id : movie.tmdb_id %>
-                <li><%= link_to 'Add to Queue', queue_path(tmdb_id: actual_tmdb_id), method: :post, class: "badge badge-success mx-1" %></li>
-              </ul>
-            </div>
-          </li>
-        <% end %>
-      </ul>
+      <%= render 'list' %>
     </div>
   </div>
 </div>

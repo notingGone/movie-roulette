@@ -1,5 +1,15 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:edit, :destroy, :show]
+  before_action :set_list, only: [:edit, :destroy]
+
+  def roulette
+    @queue = current_queue
+    debugger
+    @winner = @queue.shuffle.first
+  end
+
+  def queue
+    @list = current_queue
+  end
 
   def add_to_queue
     @queue = current_queue
@@ -62,9 +72,14 @@ class ListsController < ApplicationController
   end
 
   def remove_movie
-    MoviesList.find_by(list_id: params[:list_id], movie_id: params[:id]).delete
-    show # (list_id: params[:list_id])
-    render :show
+    MoviesList.find_by(list_id: params[:list_id], movie_id: params[:movie_id]).delete
+    if params[:list_id].to_i == current_queue.id
+      queue
+      render :queue
+    else
+      show
+      render :show
+    end
   end
 
   def destroy
@@ -80,7 +95,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:id])
+    @list = List.find(params[:list_id])
   end
 
   def edit
