@@ -34,11 +34,6 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @movie = Movie.find_by(tmdb_id: params[:tmdb_id]).attributes
-    if @movie.nil?
-      @movie = Tmdb::Movie.detail(params[:tmdb_id])
-      @not_saved = true
-    end
   end
 
   # POST /movies

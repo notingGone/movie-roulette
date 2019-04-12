@@ -27,7 +27,7 @@
             </div>
           </li>
           <div class="mb-4">
-            <%= link_to 'Shw', movie_path(movie, tmdb_id: movie.tmdb_id) %>
+            <%= link_to 'Shw', details_path(movie, tmdb_id: movie.tmdb_id) %>
             <%= link_to 'dt', edit_movie_path(movie) %>
             <%= link_to 'Dstry', movie, method: :delete, data: { confirm: 'Are you sure?' } %>
           </div>
