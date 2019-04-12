@@ -29,7 +29,7 @@
         <p>
             <% @movie.each_pair do |key, value| %>
               <p class="list-group-item">
-                <strong><%= key %>: </strong>
+                <strong><%= key %>: </strong><%= value %>
             <% end %>
         </p>
       </div>

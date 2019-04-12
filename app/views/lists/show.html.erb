@@ -3,6 +3,9 @@
     <div class="col-md-6">
       <h1><%= @list.name %></h1>
       <%= link_to "Destroy List", @list, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+
+      
+
       <ul class="media-list">
         <% @list.movies.each do |movie| %>
           <li class="media m-2">
