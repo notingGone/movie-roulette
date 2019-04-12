@@ -44,7 +44,7 @@ class ListsController < ApplicationController
     details = Tmdb::Movie.detail(params[:tmdb_id])
     #             attributes.include? key
     #           end
-    movie = Movie.new() if movie.nil?
+    movie = Movie.new()
 
     movie.title = details.title
     movie.overview = details.overview
@@ -80,7 +80,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:list_id])
+    @list = List.find(params[:id])
   end
 
   def edit

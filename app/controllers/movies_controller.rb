@@ -22,6 +22,8 @@ class MoviesController < ApplicationController
     if (@movie = Movie.find_by(tmdb_id: params[:tmdb_id])).nil?
       @movie = Tmdb::Movie.detail(params[:tmdb_id])
       @not_saved = true
+    else
+      @movie = @movie.attributes
     end
   end
 
