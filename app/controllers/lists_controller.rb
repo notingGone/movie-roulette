@@ -3,8 +3,7 @@ class ListsController < ApplicationController
 
   def roulette
     @queue = current_queue
-    debugger
-    @winner = @queue.shuffle.first
+    @winner = @queue.movies.to_a.sample
   end
 
   def queue

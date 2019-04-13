@@ -1,0 +1,6 @@
+<h1>The Winning Movie is <%= @winner.title %></h1>
+
+<% @winner.attributes.each_pair do |key, value| %>
+  <p><strong><%= key %>: </strong><%= value %></p>
+<% end %>
+<%= link_to 'Spin Again!', roulette_path, class: "btn btn-primary" %>
