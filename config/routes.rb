@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'movies#search'
+  root 'lists#roulette'
   post 'remove_movie' => 'lists#remove_movie'
   get 'new_list' => 'lists#new'
   get 'lists' => 'lists#all'
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'test' => 'movies#test'
   get 'roulette' => 'lists#roulette'
   get 'queue' => 'lists#queue'
+  get 'filter' => 'lists#filter'
+  get 'spin' => 'lists#spin'
   post 'queue' => 'lists#add_to_queue'
   devise_for :users
   resources :movies, except: :new

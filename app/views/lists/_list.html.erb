@@ -1,29 +1,21 @@
-<ul class="media-list">
-  <% @list.movies.each do |movie| %>
-    <li class="media m-2">
-      <% if !movie.poster_path.nil? %>
-        <div class="media-left mr-1">
-          <%= image_tag small_movie_poster_url(movie) %>
-        </div>
+<ul class="list-group">
+  <% list.movies.each do |movie| %>
+    <li class="list-group-item p-1">
+      <%= link_to details_path(tmdb_id: movie.tmdb_id) do %>
+        <% if movie.adult == true %>
+          <div class="btn btn-sm btn-info my-0">Adult</div>
+        <% end %>
+        <h6 class="my-0"><%= movie.title %></h6>
       <% end %>
-      <div class="media-body">
-        <h4 class="media-heading mt-0">
-          <%= link_to movie.title, details_path(tmdb_id: movie.tmdb_id) %>
-          <% if movie.adult == true %>
-            <div class='badge badge-info'>Adult</div>
-          <% end %>
-        </h4>
-        <ul>
-          <li>
-            <strong>tmdb_id: </strong><%= movie.tmdb_id %></li>
-          <% if !movie.tagline.empty? %>
-            <li><%= movie.tagline %></li>
-          <% end %>
-          <li><%= link_to 'Remove from List', remove_movie_path(movie_id: movie.id, tmdb_id: movie.tmdb_id, list_id: @list.id), method: :post, class: "badge badge-danger" %></li>
-          <% actual_tmdb_id = movie.tmdb_id.nil? ? movie.id : movie.tmdb_id %>
-          <li><%= link_to 'Add to Queue', queue_path(tmdb_id: actual_tmdb_id), method: :post, class: "badge badge-success mx-1" %></li>
-        </ul>
-      </div>
+      <% classes = "btn btn-sm btn-success mx-1" %>
+      <% if list.name.first != "\u009E" %>
+        <% classes << " disabled" if @queue.movies.pluck(:tmdb_id).include? movie.tmdb_id  %>
+        <%= link_to 'Add to Queue', queue_path(tmdb_id: movie.tmdb_id),
+          method: :post, remote: true, class: classes %>
+      <% end %>
+      <%= link_to 'Remove', remove_movie_path(
+        movie_id: movie.id, tmdb_id: movie.tmdb_id, list_id: list.id),
+        method: :post, remote: true, class: "btn btn-sm btn-danger" %>
     </li>
   <% end %>
 </ul>

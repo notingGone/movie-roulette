@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top my-navbar">
   <div class="container-fluid">
     <ul class="navbar-nav">
-      <li><%= link_to "Search", root_path, class: "navbar-brand" %></li>
+      <li><%= link_to "Search", search_path, class: "navbar-brand" %></li>
       <li><%= link_to "Database", movies_path, class: "btn btn-info mx-1"  %></li>
       <li><%= link_to "Lists", :lists, class: "btn btn-primary mx-1" %></li>
-      <li><%= link_to "Queue", queue_path(current_queue, list_id: current_queue.id), class: "btn btn-success mx-1" %></li>
+      <li><%= link_to "Queue", roulette_path, html: {id: "ajax_trigger"}, class: "btn btn-success mx-1" %></li>
     </ul>
     <p class="notice"><%= notice %></p>
     <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-warning mx-1" %>

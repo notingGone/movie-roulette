@@ -1,24 +1,26 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:edit, :destroy]
+  before_action :set_queue, only: [:roulette, :queue, :add_to_queue, :remove_movie]
+  before_action :set_list, only: [:roulette, :edit, :destroy, :filter, :add_to_queue, :remove_movie]
 
   def roulette
-    @queue = current_queue
+  end
+
+  def spin
     @winner = @queue.movies.to_a.sample
   end
 
   def queue
-    @list = current_queue
+  end
+
+  def filter
   end
 
   def add_to_queue
-    @queue = current_queue
-
     if !(movie = Movie.find_by(tmdb_id: params[:tmdb_id]))
       movie = self.save
     end
-
     @queue.movies << movie
-    redirect_to details_path(tmdb_id: params[:tmdb_id])
+    # redirect_to details_path(tmdb_id: params[:tmdb_id])
   end
 
   def new
@@ -72,21 +74,17 @@ class ListsController < ApplicationController
 
   def remove_movie
     MoviesList.find_by(list_id: params[:list_id], movie_id: params[:movie_id]).delete
-    if params[:list_id].to_i == current_queue.id
-      queue
-      render :queue
-    else
-      show
-      render :show
-    end
+    # if params[:list_id].to_i == current_queue.id
+    #   queue
+    #   render :queue
+    # else
+    #   show
+    #   render :show
+    # end
   end
 
   def destroy
     @list.destroy
-    respond_to do |format|
-      format.html { redirect_to lists_path, notice: 'Movie was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   def all
@@ -105,8 +103,13 @@ class ListsController < ApplicationController
 
   private
 
+    def set_queue
+      @queue = current_queue
+    end
+
+
     def set_list
-      @list = List.find(params[:id]) || List.new
+      @list = List.find(12)#params[:list_id])
     end
 
     def list_params

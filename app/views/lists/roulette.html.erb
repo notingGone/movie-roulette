@@ -1,6 +1,43 @@
-<h1>The Winning Movie is <%= @winner.title %></h1>
 
-<% @winner.attributes.each_pair do |key, value| %>
-  <p><strong><%= key %>: </strong><%= value %></p>
-<% end %>
-<%= link_to 'Spin Again!', roulette_path, class: "btn btn-primary" %>
+<div class="container">
+  <div class="row">
+    <div class="section">
+      <%= link_to filter_path, remote: true do %>
+        <button class="btn btn-default"><span class="fa fa-plus"></span> Filter List </button>
+      <% end %>
+      <div id="filter-form" style="display:none;"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card my-4">
+        <div id="list"><%= render 'list', list: @list %></div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card my-4">
+        <h2><%= current_user.username %>'s Queue</h2>
+        <div id="queue" class="queue"><%= render 'list', list: @queue %></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Spin Again!', spin_path, remote:true, html: {id: "ajax_trigger"}, class: "btn btn-primary" %>
+
+<script type="text/javascript">
+  function loadList(){
+    $getJSON("/list.json", function(data){
+      var html = "";
+      $.each(data, function(index){
+        //alert(data[index].content);
+        html += ""
+      })
+    })
+  }
+</script>
