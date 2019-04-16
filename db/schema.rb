@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_09_152253) do
+ActiveRecord::Schema.define(version: 2019_04_15_215521) do
 
   create_table "lists", force: :cascade do |t|
     t.string "name"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_152253) do
     t.integer "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "queue"
   end
 
   create_table "users", force: :cascade do |t|

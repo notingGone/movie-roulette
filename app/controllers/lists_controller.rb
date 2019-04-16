@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
-  before_action :set_queue, only: [:roulette, :queue, :add_to_queue, :remove_movie]
   before_action :set_list, only: [:roulette, :edit, :destroy, :filter, :add_to_queue, :remove_movie]
+  before_action :set_queue, only: [:roulette, :queue, :add_to_queue, :remove_movie, :show]
 
   def roulette
   end
@@ -19,7 +19,8 @@ class ListsController < ApplicationController
     if !(movie = Movie.find_by(tmdb_id: params[:tmdb_id]))
       movie = self.save
     end
-    @queue.movies << movie
+    @current_user.list.movies << movie
+    @current_user.list.movies.find_by(id: movie.id).update(queue: true)
     # redirect_to details_path(tmdb_id: params[:tmdb_id])
   end
 
@@ -74,13 +75,6 @@ class ListsController < ApplicationController
 
   def remove_movie
     MoviesList.find_by(list_id: params[:list_id], movie_id: params[:movie_id]).delete
-    # if params[:list_id].to_i == current_queue.id
-    #   queue
-    #   render :queue
-    # else
-    #   show
-    #   render :show
-    # end
   end
 
   def destroy
@@ -88,7 +82,7 @@ class ListsController < ApplicationController
   end
 
   def all
-    @lists = current_user.lists
+    @lists = current_user.list
   end
 
   def show
@@ -104,12 +98,14 @@ class ListsController < ApplicationController
   private
 
     def set_queue
-      @queue = current_queue
+      # debugger
+      temp = current_user.movies_lists.where(queue: true).pluck(:movie_id)
+      @queue = (List.new().movies << Movie.find(temp))
     end
 
 
     def set_list
-      @list = List.find(12)#params[:list_id])
+      @list = current_user.list.movies
     end
 
     def list_params

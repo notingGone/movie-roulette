@@ -1,5 +1,5 @@
 <ul class="list-group">
-  <% list.movies.each do |movie| %>
+  <% list.each do |movie| %>
     <li class="list-group-item p-1">
       <%= link_to details_path(tmdb_id: movie.tmdb_id) do %>
         <% if movie.adult == true %>
@@ -9,13 +9,10 @@
       <% end %>
       <% classes = "btn btn-sm btn-success mx-1" %>
       <% if list.name.first != "\u009E" %>
-        <% classes << " disabled" if @queue.movies.pluck(:tmdb_id).include? movie.tmdb_id  %>
-        <%= link_to 'Add to Queue', queue_path(tmdb_id: movie.tmdb_id),
-          method: :post, remote: true, class: classes %>
+        <% classes << " disabled" if @queue.pluck(:tmdb_id).include? movie.tmdb_id  %>
+        <%= link_to 'Add to Queue', queue_path(tmdb_id: movie.tmdb_id), method: :post, remote: true, class: classes %>
       <% end %>
-      <%= link_to 'Remove', remove_movie_path(
-        movie_id: movie.id, tmdb_id: movie.tmdb_id, list_id: list.id),
-        method: :post, remote: true, class: "btn btn-sm btn-danger" %>
+      <%= link_to 'Remove', remove_movie_path(movie_id: movie.id, tmdb_id: movie.tmdb_id), method: :post, remote: true, class: "btn btn-sm btn-danger" %>
     </li>
   <% end %>
 </ul>
