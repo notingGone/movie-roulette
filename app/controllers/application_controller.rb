@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
     if: :devise_controller?
   before_action :set_queue, only:
     [:roulette, :queue, :remove_movie, :add_to_queue, :details]
-  before_action :set_movie, only:
-    [:remove_movie, :add_to_queue]
+  before_action :set_movie, only: :remove_movie
 
   private
 

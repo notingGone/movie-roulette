@@ -17,8 +17,12 @@ class ListsController < ApplicationController
   end
 
   def add_to_queue
+    debugger
     if !(movie = Movie.find_by(tmdb_id: params[:tmdb_id]))
       movie = self.save
+    end
+    if !@queue.to_a.pluck(:tmdb_id).include? params[:tmdb_id]
+      current_user.list.movies << movie
     end
     current_user.movies_lists.find_by(movie_id: movie.id).update(queue: true)
     # redirect_to details_path(tmdb_id: params[:tmdb_id])
@@ -45,11 +49,8 @@ class ListsController < ApplicationController
   end
 
   def save
-    # attributes = [ :title, :overview, :tagline, :tmdb_id, :homepage,
-    #              :runtime, :imdb_id, :poster_path, :popularity ]
+    debugger
     details = Tmdb::Movie.detail(params[:tmdb_id])
-    #             attributes.include? key
-    #           end
     movie = Movie.new()
 
     movie.title = details.title
