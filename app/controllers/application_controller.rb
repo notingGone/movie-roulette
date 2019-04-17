@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
     end
 
     def set_movie
-      @movie = Movie.find(params[:movie_id]) unless Movie.find(params[:movie_id]).nil?
+      this_movie_id = params[:id].nil? ? params[:tmdb_id] : params[:id]
+      @movie = Movie.find_by(tmdb_id: this_movie_id)
     end
 
   protected

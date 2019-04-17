@@ -10,6 +10,8 @@ gem 'themoviedb-api'
 gem 'font-awesome-rails'
 gem 'cancancan'
 gem 'pry-rails'
+gem 'figaro'
+
 gem 'rails', '~> 5.2.3'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
@@ -19,7 +21,6 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'binding_of_caller'
-gem 'figaro'
 
 group :development, :test do
   gem 'better_errors'

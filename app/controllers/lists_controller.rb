@@ -17,14 +17,15 @@ class ListsController < ApplicationController
   end
 
   def add_to_queue
-    debugger
-    if !(movie = Movie.find_by(tmdb_id: params[:tmdb_id]))
+    # debugger
+    this_movie_id = params[:id].nil? ? params[:tmdb_id] : params[:id]
+    if !(movie = Movie.find_by(tmdb_id: this_movie_id))
       movie = self.save
     end
-    if !@queue.to_a.pluck(:tmdb_id).include? params[:tmdb_id]
+    if !@queue.to_a.pluck(:tmdb_id).include? this_movie_id
       current_user.list.movies << movie
     end
-    current_user.movies_lists.find_by(movie_id: movie.id).update(queue: true)
+    current_user.movies_lists.find_by(movie_id: this_movie_id).update(queue: true)
     # redirect_to details_path(tmdb_id: params[:tmdb_id])
     set_queue
     set_list
@@ -59,7 +60,6 @@ class ListsController < ApplicationController
     movie.tmdb_id = details.id
     movie.homepage = details.homepage
     movie.adult = details.adult
-    # movie.release_date = details.release_date
     movie.runtime = details.runtime
     movie.imdb_id = details.imdb_id
     movie.poster_path = details.poster_path
