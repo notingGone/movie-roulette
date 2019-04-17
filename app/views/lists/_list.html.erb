@@ -21,7 +21,7 @@
       <% classes = "btn btn-sm btn-success mx-1" %>
       <% if list != @queue %>
         <% classes << " disabled" if @queue.to_a.pluck(:tmdb_id).include? movie.tmdb_id  %>
-        <%= link_to 'Add to Queue', queue_path(id: movie.id, tmdb_id: movie.tmdb_id), method: :post, remote: true, class: classes %>
+        <%= link_to 'Add to Queue', queue_path(movie_id: movie.id, tmdb_id: movie.tmdb_id), method: :post, remote: true, class: classes %>
       <% end %>
       <%= link_to 'Remove', remove_movie_path(movie_id: movie.id), method: :post, remote: true, class: "btn btn-sm btn-danger" %>
     </li>

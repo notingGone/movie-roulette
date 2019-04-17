@@ -1,15 +1,23 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
-  helper_method :current_queue
+  before_action :configure_permitted_parameters,
+    if: :devise_controller?
+  before_action :set_queue, only:
+    [:roulette, :queue, :remove_movie, :add_to_queue, :details]
+  before_action :set_movie, only:
+    [:remove_movie, :add_to_queue]
 
-  def current_queue
-    # create a list that is descriptive and nearly impossible for the user to
-    # 'accidentally' enter for the name of their list
-    queue_list_name = "\u009E#{current_user.username}'s (#{current_user.id}:) queue"
-    List.find_or_create_by(user_id: current_user.id, name: queue_list_name)
-  end
+  private
+
+    def set_queue
+      temp = current_user.movies_lists.where(queue: true).pluck(:movie_id)
+      @queue = (List.new().movies << Movie.find(temp))
+    end
+
+    def set_movie
+      @movie = Movie.find(params[:movie_id]) unless Movie.find(params[:movie_id]).nil?
+    end
 
   protected
 

@@ -1,5 +1,5 @@
                    Prefix Verb   URI Pattern                                                                              Controller#Action
-                     root GET    /                                                                                        movies#search
+                     root GET    /                                                                                        lists#roulette
              remove_movie POST   /remove_movie(.:format)                                                                  lists#remove_movie
                  new_list GET    /new_list(.:format)                                                                      lists#new
                     lists GET    /lists(.:format)                                                                         lists#all
@@ -12,6 +12,11 @@
                      save GET    /save(.:format)                                                                          lists#save
                       add GET    /add(.:format)                                                                           lists#add
                      test GET    /test(.:format)                                                                          movies#test
+                 roulette GET    /roulette(.:format)                                                                      lists#roulette
+                    queue GET    /queue(.:format)                                                                         lists#queue
+                   filter GET    /filter(.:format)                                                                        lists#filter
+                     spin GET    /spin(.:format)                                                                          lists#spin
+                          POST   /queue(.:format)                                                                         lists#add_to_queue
          new_user_session GET    /users/sign_in(.:format)                                                                 devise/sessions#new
              user_session POST   /users/sign_in(.:format)                                                                 devise/sessions#create
      destroy_user_session DELETE /users/sign_out(.:format)                                                                devise/sessions#destroy

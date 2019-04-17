@@ -1,3 +1,8 @@
+refactor views/movies/details.html.erb
+  to only display what we want
+
+  add to list button
+
 don't allow duplicate movies on any list
 
 reduce to single (filterable) list.

@@ -3,7 +3,6 @@
     <ul class="navbar-nav">
       <li><%= link_to "Search", search_path, class: "navbar-brand" %></li>
       <li><%= link_to "Database", movies_path, class: "btn btn-info mx-1"  %></li>
-      <li><%= link_to "Lists", :lists, class: "btn btn-primary mx-1" %></li>
       <li><%= link_to "Queue", roulette_path, html: {id: "ajax_trigger"}, class: "btn btn-success mx-1" %></li>
     </ul>
     <p class="notice"><%= notice %></p>

@@ -1,8 +1,7 @@
 class ListsController < ApplicationController
   before_action :set_list, only:
     [:roulette, :destroy, :filter, :remove_movie]
-  before_action :set_queue, only:
-    [:roulette, :queue, :remove_movie]
+
 
   def roulette
   end
@@ -25,6 +24,7 @@ class ListsController < ApplicationController
     # redirect_to details_path(tmdb_id: params[:tmdb_id])
     set_queue
     set_list
+    set_movie
   end
 
   def new
@@ -33,15 +33,6 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
-    respond_to do |format|
-      if @list.save
-        format.html { redirect_to @list, notice: 'List created successfully.' }
-        format.json { render :show, status: :created, location: @list }
-      else
-        format.html { render :new }
-        format.json { render json: @list.errors, status: unprocessable_entity }
-      end
-    end
   end
 
   def add
@@ -83,12 +74,9 @@ class ListsController < ApplicationController
     else
       MoviesList.find_by(list_id: current_user.list, movie_id: params[:movie_id]).delete
     end
+    @movie = params[:movie_id]
     set_queue
     set_list
-  end
-
-  def destroy
-    @list.destroy
   end
 
   # def show
@@ -96,12 +84,6 @@ class ListsController < ApplicationController
   # end
 
   private
-
-    def set_queue
-      temp = current_user.movies_lists.where(queue: true).pluck(:movie_id)
-      @queue = (List.new().movies << Movie.find(temp))
-    end
-
 
     def set_list
       @list = current_user.list.movies

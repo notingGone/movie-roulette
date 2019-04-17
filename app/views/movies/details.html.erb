@@ -10,21 +10,8 @@
       <% else %>
         <span class="badge badge-success">In database<i class="fa fa-check"></i></span>
       <% end %>
-      <div class="btn-group">
-        <button class="btn btn-dark btn-sm dropdown-toggle mx-1" type="button" data-toggle="dropdown">
-          Add To List
-        </button>
-        <div class="dropdown-menu">
-          <% actual_tmdb_id = @movie['tmdb_id'].nil? ? @movie['id'] : @movie['tmdb_id'] %>
-          <% current_user.lists.each do |list| %>
-            <% next if list.name.first == "\u009E" %>
-            <% classes = ["dropdown-item"] %>
-            <% classes << "disabled" if list.movies.pluck(:id).include? @movie['id'] %>
-            <%= link_to list.name, add_path(tmdb_id: actual_tmdb_id, list_id: list.id), class: classes %>
-          <% end %>
-        </div>
-      </div>
-      <%= link_to 'Add to Queue', queue_path(tmdb_id: actual_tmdb_id), method: :post, class: "btn btn-sm btn-success mx-1" %>
+      <%# debugger %>
+      <span id="queue-button"><%= render 'queue_button', queue: @queue, movie: @movie %></span>
       <div class="list-group">
         <p>
             <% @movie.each_pair do |key, value| %>
