@@ -87,7 +87,7 @@ class ListsController < ApplicationController
   private
 
     def set_list
-      @list = current_user.list.movies
+      @list = List.find_or_create_by(user_id: current_user.id)
     end
 
     def list_params
