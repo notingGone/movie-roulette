@@ -26,14 +26,16 @@
   </div>
 </div>
 
-<%= link_to 'Spin Again!', spin_path, remote:true, html: {id: "ajax_trigger"}, class: "btn btn-primary" %>
+<%= link_to 'Spin The Wheel!', spin_path, remote:true, html: {id: "ajax_trigger"}, class: "btn btn-primary" %>
+
+<h1 id="winner"></h1>
 
 <script type="text/javascript">
   function loadList(){
     $getJSON("/list.json", function(data){
       var html = "";
       $.each(data, function(index){
-        //alert(data[index].content);
+        alert(data[index].content);
         html += ""
       })
     })

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'lists#roulette'
-  post 'remove_movie' => 'lists#remove_movie'
+  post 'remove_from_queue' => 'lists#remove_from_queue'
+  post 'remove_from_list' => 'lists#remove_from_list'
   get 'new_list' => 'lists#new'
   get 'lists' => 'lists#all'
   get 'view_list' => 'lists#show'

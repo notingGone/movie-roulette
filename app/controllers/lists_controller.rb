@@ -6,7 +6,7 @@ class ListsController < ApplicationController
   end
 
   def spin
-    @winner = @queue.movies.to_a.sample
+    @winner = @queue.to_a.sample.title
   end
 
   def filter
@@ -37,13 +37,15 @@ class ListsController < ApplicationController
     redirect_to details_path(tmdb_id: params[:tmdb_id])
   end
 
-  def remove_movie
-    movie = current_user.movies_lists.find_by(movie_id: params[:movie_id])
-    if movie.queue
-      movie.update(queue: false)
-    else
-      MoviesList.find_by(list_id: current_user.list, movie_id: params[:movie_id]).delete
-    end
+  def remove_from_list
+    MoviesList.where(list_id: current_user.list.id).where(movie_id: params[:movie_id]).first.delete
+    redirect_back fallback_location: :root
+  end
+
+  def remove_from_queue
+    movie = MoviesList.where(list_id: current_user.list.id).where(movie_id: params[:movie_id]).first
+    movie.update(queue: false)
+
     @movie = params[:movie_id]
     set_queue
     set_list

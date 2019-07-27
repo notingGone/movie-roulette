@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters,
     if: :devise_controller?
   before_action :set_queue, only:
-    [:roulette, :queue, :remove_movie, :add_to_queue]
+    [:roulette, :queue, :remove_movie, :add_to_queue, :spin]
   before_action :set_movie, only: [:remove_movie, :details]
   before_action :set_list, only: [:details, :roulette, :add_to_queue]
   before_action :save, only: :details
@@ -34,15 +34,8 @@ class ApplicationController < ActionController::Base
     end
 
     def set_queue
-      # @queue = List.where(id: current_user.list.id).where(movies_lists: {queue: true})
-      # @queue = List.where(id: current_user.list.id).movies.where()
       queue_ids = MoviesList.where(list_id: current_user.list.id).where(queue: true).pluck(:movie_id)
       @queue = Movie.find(queue_ids)
-      # debugger
-      # @queue = current_user.joins(:movies_list)
-      # @queue = current_user.list.movies.where(queue: true)
-      # temp = current_user.movies.where(queue: true).pluck(:movie_id)
-      # @queue = (List.new().movies << Movie.find(temp))
     end
 
     def set_movie

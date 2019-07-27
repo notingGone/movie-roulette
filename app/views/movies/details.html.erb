@@ -5,11 +5,6 @@
         <%= image_tag small_movie_poster_url(@movie) %>
       <% end %>
       <h2><%= @movie['title'] %></h2>
-      <% if @not_saved %>
-        <span class="badge badge-warning">NOT in DB</span>
-      <% else %>
-        <span class="badge badge-success">In database<i class="fa fa-check"></i></span>
-      <% end %>
       <span id="queue-button"><%= render 'list_button', list: @list, movie: @movie %></span>
       <div class="list-group">
         <p>
