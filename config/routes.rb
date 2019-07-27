@@ -10,12 +10,12 @@ Rails.application.routes.draw do
   get 'details/:id' => 'movies#details'
   get 'details' => 'movies#details'
   get 'save' => 'lists#save'
-  get 'add' => 'lists#add'
   get 'test' => 'movies#test'
   get 'roulette' => 'lists#roulette'
   get 'queue' => 'lists#queue'
   get 'filter' => 'lists#filter'
   get 'spin' => 'lists#spin'
+  post 'add' => 'lists#add'
   post 'queue' => 'lists#add_to_queue'
   devise_for :users
   resources :movies, except: :new

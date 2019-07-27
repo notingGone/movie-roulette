@@ -5,5 +5,18 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :list
-  has_many :movies_lists, through: :list
+
+  after_create :create_list
+
+  delegate :movies, to: :list, allow_nil: true
+
+  # def movies
+  #   list.movies
+  # end
+
+  private
+
+    def create_list
+      List.find_or_create_by(user_id: id)
+    end
 end

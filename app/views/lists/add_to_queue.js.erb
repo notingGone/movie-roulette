@@ -1,3 +1,2 @@
-$('#queue').html("<%= j (render 'list', list: @queue) %>");
-$('#list').html("<%= j (render 'list', list: @list) %>");
-$('#queue-button').html("<%= j (render 'movies/queue_button', queue: @queue, movie: @movie) %>");
+$('#queue').html("<%= j (render 'list', list: @queue, type: 'queue') %>");
+$('#list').html("<%= j (render 'list', list: @list, type: 'list') %>");

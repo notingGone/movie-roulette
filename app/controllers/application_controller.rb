@@ -4,14 +4,45 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters,
     if: :devise_controller?
   before_action :set_queue, only:
-    [:roulette, :queue, :remove_movie, :add_to_queue, :details]
-  before_action :set_movie, only: :remove_movie
+    [:roulette, :queue, :remove_movie, :add_to_queue]
+  before_action :set_movie, only: [:remove_movie, :details]
+  before_action :set_list, only: [:details, :roulette, :add_to_queue]
+  before_action :save, only: :details
 
   private
 
+    def save
+      details = Tmdb::Movie.detail(params[:tmdb_id])
+      movie = Movie.new()
+
+      movie.title = details.title
+      movie.overview = details.overview
+      movie.tagline = details.tagline
+      movie.tmdb_id = details.id
+      movie.homepage = details.homepage
+      movie.adult = details.adult
+      movie.runtime = details.runtime
+      movie.imdb_id = details.imdb_id
+      movie.poster_path = details.poster_path
+      movie.popularity = details.popularity
+      movie.save
+      movie
+    end
+
+    def set_list
+      @list = current_user.list.movies
+    end
+
     def set_queue
-      temp = current_user.movies_lists.where(queue: true).pluck(:movie_id)
-      @queue = (List.new().movies << Movie.find(temp))
+      # @queue = List.where(id: current_user.list.id).where(movies_lists: {queue: true})
+      # @queue = List.where(id: current_user.list.id).movies.where()
+      queue_ids = MoviesList.where(list_id: current_user.list.id).where(queue: true).pluck(:movie_id)
+      @queue = Movie.find(queue_ids)
+      # debugger
+      # @queue = current_user.joins(:movies_list)
+      # @queue = current_user.list.movies.where(queue: true)
+      # temp = current_user.movies.where(queue: true).pluck(:movie_id)
+      # @queue = (List.new().movies << Movie.find(temp))
     end
 
     def set_movie

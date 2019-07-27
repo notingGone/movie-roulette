@@ -1,29 +1,24 @@
-<% if list == @queue %>
+<% if type == 'queue' %>
   <% if @queue.length > 0 %>
-    <% if user_signed_in? %>
-      <h2><%= current_user.username %>'s Queue</h2>
-    <% else %>
-      <%= Your Queue %>
-    <% end %>
+      <h2>Your Queue</h2>
   <% else %>
     <h2>No Queue Yet</h2>
   <% end %>
+<% else %>
+  <h2>Your List</h2>
 <% end %>
-<ul class="list-group">
-  <% list.each do |movie| %>
-    <li class="list-group-item p-1">
-      <%= link_to details_path(tmdb_id: movie.tmdb_id) do %>
-        <% if movie.adult == true %>
-          <div class="btn btn-sm btn-info my-0">Adult</div>
+  <ul class="list-group">
+    <% list.each do |movie| %>
+      <li class="list-group-item p-1">
+        <%= link_to details_path(tmdb_id: movie.tmdb_id) do %>
+          <h6 class="my-0"><%= movie.title %></h6>
         <% end %>
-        <h6 class="my-0"><%= movie.title %></h6>
-      <% end %>
-      <% classes = "btn btn-sm btn-success mx-1" %>
-      <% if list != @queue %>
-        <% classes << " disabled" if @queue.to_a.pluck(:tmdb_id).include? movie.tmdb_id  %>
-        <%= link_to 'Add to Queue', queue_path(movie_id: movie.id, tmdb_id: movie.tmdb_id), method: :post, remote: true, class: classes %>
-      <% end %>
-      <%= link_to 'Remove', remove_movie_path(movie_id: movie.id), method: :post, remote: true, class: "btn btn-sm btn-danger" %>
-    </li>
-  <% end %>
-</ul>
+        <% classes = "btn btn-sm btn-success mx-1" %>
+        <% if type != 'queue' %>
+          <% classes << " disabled" if @queue.to_a.pluck(:tmdb_id).include? movie.tmdb_id  %>
+          <%= link_to 'Add to Queue', queue_path(movie_id: movie.id), method: :post, remote: true, class: classes %>
+        <% end %>
+        <%= link_to 'Remove', remove_movie_path(movie_id: movie.id), method: :post, remote: true, class: "btn btn-sm btn-danger" %>
+      </li>
+    <% end %>
+  </ul>

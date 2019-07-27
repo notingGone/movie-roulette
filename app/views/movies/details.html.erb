@@ -10,8 +10,7 @@
       <% else %>
         <span class="badge badge-success">In database<i class="fa fa-check"></i></span>
       <% end %>
-      <%# debugger %>
-      <span id="queue-button"><%= render 'queue_button', queue: @queue, movie: @movie %></span>
+      <span id="queue-button"><%= render 'list_button', list: @list, movie: @movie %></span>
       <div class="list-group">
         <p>
             <% @movie.each_pair do |key, value| %>

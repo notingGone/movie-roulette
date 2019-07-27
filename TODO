@@ -1,3 +1,5 @@
+in #roulete action: check if current_user has a list, if not, redirect to #search
+
 refactor views/movies/details.html.erb
   to only display what we want
 

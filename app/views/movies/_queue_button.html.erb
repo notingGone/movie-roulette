@@ -1,5 +1,0 @@
-<% if queue.to_a.pluck(:id).include? movie['id'] %>
-  <%= link_to 'Remove from Queue', remove_movie_path(movie_id: movie['id'], tmdb_id: movie['tmdb_id']), id: "remove-from-queue-button", method: :post, remote: true, class: "btn btn-sm btn-primary" %>
-<% else %>
-  <%= link_to 'Add to Queue', queue_path(tmdb_id: movie['id']), id: "add-to-queue-button", method: :post, remote: true, class: "btn btn-sm btn-primary" %>
-<% end %>
